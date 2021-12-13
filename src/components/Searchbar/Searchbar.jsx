@@ -3,13 +3,13 @@ import s from "./Searchbar.module.css";
 function Searchbar() {
   return (
     <header className={s.Searchbar}>
-      <form className={s.Form}>
-        <button type="submit" className={s.Button}>
-          <span className={s.ButtonLabel}>Search</span>
+      <form className={s.SearchForm}>
+        <button type="submit" className={s.SearchFormButton}>
+          <span className={s.SearchFormButtonLabel}>Search</span>
         </button>
 
         <input
-          className={s.Input}
+          className={s.SearchFormInput}
           type="text"
           autocomplete="off"
           autofocus
