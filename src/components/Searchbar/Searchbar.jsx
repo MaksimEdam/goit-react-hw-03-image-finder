@@ -1,3 +1,4 @@
+import { ImSearch } from "react-icons/im";
 import s from "./Searchbar.module.css";
 
 function Searchbar() {
@@ -5,6 +6,7 @@ function Searchbar() {
     <header className={s.Searchbar}>
       <form className={s.SearchForm}>
         <button type="submit" className={s.SearchFormButton}>
+          <ImSearch style={{ marginRight: 8 }} />
           <span className={s.SearchFormButtonLabel}>Search</span>
         </button>
 
