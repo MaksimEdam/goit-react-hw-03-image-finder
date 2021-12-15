@@ -1,6 +1,6 @@
 import { ImSearch } from "react-icons/im";
-import s from "./Searchbar.module.css";
 import React, { Component } from "react";
+import s from "./Searchbar.module.css";
 class Searchbar extends Component {
   state = {
     imageName: "",
@@ -9,6 +9,7 @@ class Searchbar extends Component {
   handleNameChange = (event) => {
     this.setState({ imageName: event.currentTarget.value.toLowerCase() });
   };
+
   handleSubmit = (event) => {
     event.preventDefault();
     if (this.state.imageName.trim() === "") {
@@ -27,12 +28,9 @@ class Searchbar extends Component {
             <ImSearch style={{ marginRight: 8 }} />
             <span className={s.SearchFormButtonLabel}>Search</span>
           </button>
-
           <input
             className={s.SearchFormInput}
             type="text"
-            autocomplete="off"
-            autofocus
             placeholder="Search images and photos"
             value={this.state.imageName}
             onChange={this.handleNameChange}
