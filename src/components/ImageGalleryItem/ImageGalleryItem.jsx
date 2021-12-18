@@ -14,10 +14,10 @@ export default class ImageGalleryItem extends Component {
 
   render() {
     return (
-      <li className={s.ImageGalleryItemImage}>
+      <li className={s.ImageGalleryItem}>
         <img
           onClick={this.toggleModal}
-          className={s.galleryItemImage}
+          className={s.ImageGalleryItemImage}
           src={this.props.webformatURL}
           alt={this.props.tags}
         />

@@ -1,10 +1,11 @@
-import axios from "axios";
+//import axios from "axios";
 import Searchbar from "../Searchbar";
 import React, { Component } from "react";
 import ImageGallery from "../ImageGallery";
 import Button from "../Button";
 import Spinner from "../Spinner";
 import s from "./App.module.css";
+import imagesApi from "../../services/imagesApi";
 
 class App extends Component {
   state = {
@@ -14,27 +15,30 @@ class App extends Component {
     page: 1,
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  async componentDidUpdate(prevProps, prevState) {
     const prevName = prevState.imageName;
     const nextName = this.state.imageName;
 
     if (prevName !== nextName || prevState.page !== this.state.page) {
       this.setState({ loading: true });
-      axios
-        .get(
-          `https://pixabay.com/api/?q=${nextName}&page=${this.state.page}&key=18992166-123806360f211761da038f5eb&image_type=photo&orientation=horizontal&per_page=12`
-        )
-        .then((result) => {
-          this.setState((prevState) => ({
-            items: [...prevState.items, ...result.data.hits],
-          }));
-        })
-        .finally(() => this.setState({ loading: false }));
+
+      try {
+        const result = await imagesApi(nextName, this.state.page);
+        this.setState((prevState) => ({
+          items: [...prevState.items, ...result.hits],
+        }));
+      } catch (e) {
+        console.error(e);
+      } finally {
+        this.setState({ loading: false });
+      }
     }
   }
 
   handleFormSubmit = (imageName) => {
     this.setState({ imageName });
+    this.setState({ items: [] });
+    this.setState({ page: 1 });
   };
 
   onBtnClick = () => {
