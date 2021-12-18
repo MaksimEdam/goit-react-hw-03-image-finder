@@ -1,11 +1,11 @@
-//import axios from "axios";
-import Searchbar from "../Searchbar";
 import React, { Component } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import ImageGallery from "../ImageGallery";
+import Searchbar from "../Searchbar";
 import Button from "../Button";
 import Spinner from "../Spinner";
-import s from "./App.module.css";
 import imagesApi from "../../services/imagesApi";
+import s from "./App.module.css";
 
 class App extends Component {
   state = {
@@ -27,6 +27,9 @@ class App extends Component {
         this.setState((prevState) => ({
           items: [...prevState.items, ...result.hits],
         }));
+        if (!this.state.items.length) {
+          toast.error("фото отсутствует");
+        }
       } catch (e) {
         console.error(e);
       } finally {
@@ -53,6 +56,7 @@ class App extends Component {
         <Searchbar onSubmit={this.handleFormSubmit} />
         <ImageGallery items={items} />
         {this.state.items.length > 0 && <Button onBtnClick={this.onBtnClick} />}
+        <ToastContainer theme="colored" />
       </div>
     );
   }

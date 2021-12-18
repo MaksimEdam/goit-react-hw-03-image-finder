@@ -1,5 +1,7 @@
+import { toast } from "react-toastify";
 import { ImSearch } from "react-icons/im";
 import React, { Component } from "react";
+import "react-toastify/dist/ReactToastify.css";
 import s from "./Searchbar.module.css";
 class Searchbar extends Component {
   state = {
@@ -13,9 +15,10 @@ class Searchbar extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     if (this.state.imageName.trim() === "") {
-      alert("Введите имя");
+      toast.warn("Введите поисковый запрос");
       return;
     }
+
     this.props.onSubmit(this.state.imageName);
     this.setState({ imageName: "" });
   };

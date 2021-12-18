@@ -1,4 +1,5 @@
 import axios from "axios";
+
 axios.defaults.baseURL = "https://pixabay.com/api/";
 axios.defaults.params = {
   key: "18992166-123806360f211761da038f5eb",
@@ -6,6 +7,7 @@ axios.defaults.params = {
   orientation: "horizontal",
   per_page: "12",
 };
+
 async function imagesApi(nextName, page) {
   try {
     const { data } = await axios.get(`?q=${nextName}&page=${page}`);
